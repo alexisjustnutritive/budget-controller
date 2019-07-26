@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import AddBudgetForm from './components/AddBudgetForm'
-import Expenses from './components/Expenses';
 import BudgetReview from './components/BudgetReview';
+import WeekExpenses from './components/WeekExpenses';
+import ExpenseForm from './components/ExpenseForm';
 
 function App() {
 
@@ -27,10 +28,17 @@ function App() {
                 <AddBudgetForm setBudget={ setBudget }/>
             </Col>
             <Col xs={12} className="my-2">
-                <BudgetReview budget={ budget } remaining={ remaining } />
+                { budget > 0 ? <BudgetReview budget={ budget } remaining={ remaining } /> : null }
             </Col>
-            <Col xs={12}>
-                <Expenses addExpense={ addExpense } />
+        </Row>
+        <Row>
+            <Col xs={ 6 }>
+                { budget > 0 ? <ExpenseForm addExpense={ addExpense }/> : null }
+            </Col>
+            <Col xs={ 6 }>
+                { expenses.length > 0 ? 
+                    <WeekExpenses expenses={ expenses } /> : null 
+                } 
             </Col>
         </Row>
     </Container>
