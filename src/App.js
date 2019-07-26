@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+
+import AddBudgetForm from './components/AddBudgetForm'
+import Expenses from './components/Expenses';
+import BudgetReview from './components/BudgetReview';
 
 function App() {
+
+    const [budget, setBudget] = useState( 0 );
+    const [remaining, setRemaining] = useState( 0 );
+    const [expenses, setExpenses] = useState( [] ); // expenses array objets { name: '', cost: '', description: '' }
+
+    const addExpense = expense => {
+        let updatedExpenses = [ ...expenses, expense ];
+        setExpenses( updatedExpenses );
+    };
+
+    useEffect( () => {
+        console.log( expenses );
+    }, [ expenses ] );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="mt-4 text-center">
+        <Row>
+            <Col xs={12} className="my-2">
+                <AddBudgetForm setBudget={ setBudget }/>
+            </Col>
+            <Col xs={12} className="my-2">
+                <BudgetReview budget={ budget } remaining={ remaining } />
+            </Col>
+            <Col xs={12}>
+                <Expenses addExpense={ addExpense } />
+            </Col>
+        </Row>
+    </Container>
   );
 }
 
