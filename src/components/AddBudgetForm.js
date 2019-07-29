@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddBudgetForm = ( { setBudget } ) => {
+const AddBudgetForm = ( { setBudget, setRemaining } ) => {
 
     const [budgetValue, setBudgetValue] = useState( 0 );
 
@@ -11,6 +11,7 @@ const AddBudgetForm = ( { setBudget } ) => {
     const onSubmit = e => {
         e.preventDefault();
         setBudget( budgetValue );
+        setRemaining( budgetValue );
     }
 
     return (

@@ -13,7 +13,6 @@ const ExpenseForm = ( { addExpense } ) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        setExpense( expense );
         addExpense( expense );
     }
 
